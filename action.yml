@@ -36,7 +36,7 @@ outputs:
   artifact_path:
     description: |
       Module name
-    value: "${{ inputs.id }}.zip"
+    value: "module/${{ inputs.id }}.zip"
 runs:
   using: "composite"
   steps:
