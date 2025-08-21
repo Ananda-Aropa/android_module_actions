@@ -1,0 +1,57 @@
+name: 'aaropa_android_module_ksu_headless'
+description: |
+  Build a flashable KernelSU zip package
+inputs:
+  id:
+    description: |
+      Module ID
+    required: true
+  name:
+    description: |
+      Module name
+    required: true
+  version:
+    description: |
+      Module version
+    required: true
+  version_code:
+    description: |
+      Module version code (positive integer)
+    required: false
+  author:
+    description: |
+      Module author
+    required: true
+    default: "${{ github.actor }}"
+  description:
+    description: |
+      Module description
+    required: true
+    default: ""
+  update_json:
+    description: |
+      Module update CDN/mirror
+    required: false
+outputs:
+  artifact_path:
+    description: |
+      Module name
+    value: "${{ inputs.id }}.zip"
+runs:
+  using: "composite"
+  steps:
+    - name: Package module
+      env:
+        ID: ${{ inputs.id }}
+        NAME: ${{ inputs.name }}
+        VERSION: ${{ inputs.version }}
+        VERSION_CODE: ${{ inputs.version_code }}
+        AUTHOR: ${{ inputs.author }}
+        DESCRIPTION: ${{ inputs.description }}
+        UPDATE_JSON: ${{ inputs.update_json }}
+      run: |
+        cp ${{ github.action_path }}/action.sh .
+        mkdir -p module
+        cp -rn ${{ github.action_path }}/module/. module
+        bash ./action.sh
+      shell: bash
