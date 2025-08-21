@@ -18,5 +18,8 @@ if [ -n "$UPDATE_JSON" ]; then
 	echo "updateJson=$UPDATE_JSON" >> module/module.prop
 fi
 
-zip -r "$ID.zip" module
+cd module
+zip -r "$ID.zip" .
+cd ..
+
 exit 0
