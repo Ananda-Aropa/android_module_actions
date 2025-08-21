@@ -35,7 +35,7 @@ inputs:
 outputs:
   artifact_path:
     description: |
-      Module name
+      Module built artifact path
     value: "module/${{ inputs.id }}.zip"
 runs:
   using: "composite"
